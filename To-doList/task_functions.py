@@ -3,9 +3,7 @@ import csv
 from tkinter import filedialog
 import tkinter as tk
 from dialogs import TimeframeDialog
-import os
 
-path = ""
 
 def add_task(task_entry, treeview, root):
     task = task_entry.get()
@@ -26,34 +24,8 @@ def delete_task(treeview):
         pass
 
 
-def startup_load_tasks(treeview):
-    if os.path.exists('path.txt'):
-        with open('path.txt', 'r') as file:
-            path = file.read()
-
-        if path:
-            try:
-                treeview.delete(*treeview.get_children())
-                with open(path, 'r', newline='') as file:
-                    reader = csv.reader(file)
-                    for row in reader:
-                        task, timeframe, importance, *status = row
-                        status = tuple(status)
-                        treeview.insert('', 'end', values=(task, timeframe, importance), tags=status)
-            except:
-                pass
-
-
 def load_tasks(treeview):
-    global path
     path = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Load Tasks")
-
-    with open('path.txt', 'w'):
-        pass
-    with open('path.txt', 'w') as file:
-        file.write(path)
-
-    # print(path) use for debug
     if path:
         try:
             treeview.delete(*treeview.get_children())
@@ -107,7 +79,7 @@ def update_grouped_table(grouped_treeview):
     for i in grouped_treeview.get_children():
         grouped_treeview.delete(i)
 
-    df = pd.read_csv(path, header=None, names=["Task", "Timeframe", "Importance", "tags"])
+    df = pd.read_csv('TodoList.csv', header=None, names=["Task", "Timeframe", "Importance", "tags"])
     grouped = df.groupby("Importance")["Task"].apply(list)
     tasks_by_importance = {"Extreme": [], "High": [], "Medium": [], "Low": [], "Idle": []}
 
