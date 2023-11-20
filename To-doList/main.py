@@ -4,7 +4,6 @@ from dialogs import TimeframeDialog
 from task_functions import add_task, delete_task, load_tasks, save_tasks, toggle_task_done, switch_table, update_grouped_table, startup_load_tasks
 import tkinter as tk
 
-
 root = ThemedTk(theme="arc")
 root.title("To-Do List")
 

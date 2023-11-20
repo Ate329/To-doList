@@ -27,19 +27,21 @@ def delete_task(treeview):
 
 
 def startup_load_tasks(treeview):
-    with open('path.txt', 'r') as file:
-        path = file.read()
-    if path:
-        try:
-            treeview.delete(*treeview.get_children())
-            with open(path, 'r', newline='') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    task, timeframe, importance, *status = row
-                    status = tuple(status)
-                    treeview.insert('', 'end', values=(task, timeframe, importance), tags=status)
-        except:
-            pass
+    if os.path.exists('path.txt'):
+        with open('path.txt', 'r') as file:
+            path = file.read()
+
+        if path:
+            try:
+                treeview.delete(*treeview.get_children())
+                with open(path, 'r', newline='') as file:
+                    reader = csv.reader(file)
+                    for row in reader:
+                        task, timeframe, importance, *status = row
+                        status = tuple(status)
+                        treeview.insert('', 'end', values=(task, timeframe, importance), tags=status)
+            except:
+                pass
 
 
 def load_tasks(treeview):
