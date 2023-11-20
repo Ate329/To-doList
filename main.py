@@ -1,7 +1,7 @@
 from tkinter import ttk
 from ttkthemes import ThemedTk
 from dialogs import TimeframeDialog
-from task_functions import add_task, delete_task, load_tasks, save_tasks, toggle_task_done, switch_table, update_grouped_table
+from task_functions import add_task, delete_task, load_tasks, save_tasks, toggle_task_done, switch_table, update_grouped_table, startup_load_tasks
 import tkinter as tk
 
 
@@ -56,5 +56,6 @@ save_button.grid(row=6, column=0, sticky='nsew')
 switch_button = ttk.Button(root, text="Switch Table", command=lambda: switch_table(treeview, grouped_treeview))
 switch_button.grid(row=7, column=0, sticky='nsew')
 
+startup_load_tasks(treeview)
 
 root.mainloop()

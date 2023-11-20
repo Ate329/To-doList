@@ -3,6 +3,7 @@ import csv
 from tkinter import filedialog
 import tkinter as tk
 from dialogs import TimeframeDialog
+import os
 
 path = ""
 
@@ -25,9 +26,31 @@ def delete_task(treeview):
         pass
 
 
+def startup_load_tasks(treeview):
+    with open('path.txt', 'r') as file:
+        path = file.read()
+    if path:
+        try:
+            treeview.delete(*treeview.get_children())
+            with open(path, 'r', newline='') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    task, timeframe, importance, *status = row
+                    status = tuple(status)
+                    treeview.insert('', 'end', values=(task, timeframe, importance), tags=status)
+        except:
+            pass
+
+
 def load_tasks(treeview):
     global path
     path = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Load Tasks")
+
+    with open('path.txt', 'w'):
+        pass
+    with open('path.txt', 'w') as file:
+        file.write(path)
+
     # print(path) use for debug
     if path:
         try:
