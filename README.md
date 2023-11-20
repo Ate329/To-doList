@@ -4,7 +4,7 @@ This is a simple To-Do List application implemented in Python using the Tkinter 
 # How to use
 1. Run Main.py to start the To-Do List application.     
 
-2. Use the buttons to add, delete, load, and save tasks.    
+2. Use the buttons to add, delete, load and save tasks.    
 
 3. Double-click on a task in the list to mark it as done or undone.     
 
@@ -12,7 +12,7 @@ This is a simple To-Do List application implemented in Python using the Tkinter 
 
 **Note: Make sure to have the required libraries (tkinter, ttkthemes, pandas) installed before running the application.**   
 
-or you can install the libraries by     
+Or you can install the libraries by     
 ```python
 pip install requirements.txt
 ```
