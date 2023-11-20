@@ -4,6 +4,7 @@ from tkinter import filedialog
 import tkinter as tk
 from dialogs import TimeframeDialog
 
+path = ""
 
 def add_task(task_entry, treeview, root):
     task = task_entry.get()
@@ -25,7 +26,9 @@ def delete_task(treeview):
 
 
 def load_tasks(treeview):
+    global path
     path = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Load Tasks")
+    # print(path) use for debug
     if path:
         try:
             treeview.delete(*treeview.get_children())
@@ -79,7 +82,7 @@ def update_grouped_table(grouped_treeview):
     for i in grouped_treeview.get_children():
         grouped_treeview.delete(i)
 
-    df = pd.read_csv('TodoList.csv', header=None, names=["Task", "Timeframe", "Importance", "tags"])
+    df = pd.read_csv(path, header=None, names=["Task", "Timeframe", "Importance", "tags"])
     grouped = df.groupby("Importance")["Task"].apply(list)
     tasks_by_importance = {"Extreme": [], "High": [], "Medium": [], "Low": [], "Idle": []}
 
