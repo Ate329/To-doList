@@ -18,3 +18,4 @@ class TimeframeDialog(tk.simpledialog.Dialog):
     def apply(self):
         self.time_result = self.time_entry.get()
         self.importance_result = self.importance_entry.get()
+1
