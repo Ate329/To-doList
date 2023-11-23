@@ -12,6 +12,10 @@ This module contains the **"TimeframeDialog"** class, a custom dialog for captur
 ## task_functions.py
 This module contains various functions related to task management, including adding and deleting tasks, loading and saving tasks from/to CSV files, toggling task completion status, and updating the grouped view. 
 
+## Pictures
+![Screenshot 2023-11-23 123442](https://github.com/Ateee329/To-doList/assets/74974216/c0843791-e28e-4a19-adf4-48d5648bca5e)
+![Screenshot 2023-11-23 123527](https://github.com/Ateee329/To-doList/assets/74974216/f00d655c-caa6-4486-93a1-161f081bc3de)
+
 
 # How to use
 1. Run Main.py to start the To-Do List application.     
