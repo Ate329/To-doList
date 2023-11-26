@@ -26,7 +26,7 @@ grouped_treeview.grid_remove()
 
 treeview = ttk.Treeview(root, columns=("Task", "Timeframe", "Importance"), show="headings")
 treeview.heading("Task", text="Task")
-treeview.heading("Timeframe", text="Timeframe")
+treeview.heading("Timeframe", text="Deadline")
 treeview.heading("Importance", text="Importance")
 treeview.grid(row=1, column=0, sticky='nsew')
 
@@ -42,7 +42,7 @@ treeview.tag_configure("undone", foreground="black")
 add_button = ttk.Button(root, text="Add Task", command=lambda: add_task(task_entry, treeview, root)) 
 add_button.grid(row=3, column=0, sticky='nsew')
 
-complete_button = ttk.Button(root, text="Complete Task (Hotkey=<Double-1>?)", command=lambda event: toggle_task_done(event, treeview))
+complete_button = ttk.Button(root, text="Complete Task (Hotkey=<Double-1>?)", command=lambda event: toggle_task_done(event,treeview))
 complete_button.grid(row=4, column=0, sticky='nsew')
 
 delete_button = ttk.Button(root, text="Delete Task", command=lambda: delete_task(treeview)) 
@@ -57,6 +57,6 @@ save_button.grid(row=7, column=0, sticky='nsew')
 switch_button = ttk.Button(root, text="Switch View", command=lambda: switch_table(treeview, grouped_treeview))
 switch_button.grid(row=8, column=0, sticky='nsew')
 
-startup_load_tasks(treeview)
+startup_load_tasks(None, treeview)
 
 root.mainloop()

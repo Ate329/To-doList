@@ -11,7 +11,7 @@ def add_task(task_entry: tk.Entry, treeview: ttk.Treeview, root):
     task = task_entry.get()
     if task != "":
         dialog = TimeframeDialog(root)
-        timeframe = dialog.time_result
+        timeframe = dialog.time_result.ctime()
         importance = dialog.importance_result
         if timeframe and importance:
             treeview.insert('', 'end', values=(task, timeframe, importance), tags=("undone",))
@@ -26,7 +26,7 @@ def delete_task(treeview: ttk.Treeview):
         pass
 
 
-def startup_load_tasks(treeview: ttk.Treeview):
+def startup_load_tasks(event, treeview: ttk.Treeview):
     if os.path.exists('path.txt'):
         with open('path.txt', 'r') as file:
             path = file.read()
@@ -81,7 +81,7 @@ def save_tasks(treeview: ttk.Treeview):
                 writer.writerow(task[0] + list(task[1]))
 
 
-def toggle_task_done(event, treeview: ttk.Treeview):
+def toggle_task_done(treeview: ttk.Treeview):
     try:
         selected_item = treeview.selection()[0]                                 # Add currently selected (highlighted) item
         # task, timeframe, importance = treeview.item(selected_item)['values']
