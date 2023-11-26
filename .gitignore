@@ -1,2 +1,2 @@
 path.txt
-/To-doList/__pycache__/
+*.pyc
