@@ -1,13 +1,13 @@
 import pandas as pd
 import csv
-from tkinter import filedialog
+from tkinter import filedialog, ttk
 import tkinter as tk
 from dialogs import TimeframeDialog
 import os
 
 path = ""
 
-def add_task(task_entry, treeview, root):
+def add_task(task_entry: tk.Entry, treeview: ttk.Treeview, root):
     task = task_entry.get()
     if task != "":
         dialog = TimeframeDialog(root)
@@ -18,7 +18,7 @@ def add_task(task_entry, treeview, root):
     task_entry.delete(0, tk.END)
 
 
-def delete_task(treeview):
+def delete_task(treeview: ttk.Treeview):
     try:
         selected_item = treeview.selection()[0]
         treeview.delete(selected_item)
@@ -26,7 +26,7 @@ def delete_task(treeview):
         pass
 
 
-def startup_load_tasks(treeview):
+def startup_load_tasks(treeview: ttk.Treeview):
     if os.path.exists('path.txt'):
         with open('path.txt', 'r') as file:
             path = file.read()
@@ -44,7 +44,7 @@ def startup_load_tasks(treeview):
                 pass
 
 
-def load_tasks(treeview):
+def load_tasks(treeview: ttk.Treeview):
     global path
     path = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Load Tasks")
 
@@ -67,7 +67,7 @@ def load_tasks(treeview):
             pass
 
 
-def save_tasks(treeview):
+def save_tasks(treeview: ttk.Treeview):
     path = filedialog.asksaveasfilename(defaultextension=".csv", 
                                         filetypes=[("CSV files", "*.csv")], 
                                         title="Save Tasks", 
@@ -81,10 +81,10 @@ def save_tasks(treeview):
                 writer.writerow(task[0] + list(task[1]))
 
 
-def toggle_task_done(event, treeview):
+def toggle_task_done(event, treeview: ttk.Treeview):
     try:
-        selected_item = treeview.selection()[0]
-        task, timeframe, importance = treeview.item(selected_item)['values']
+        selected_item = treeview.selection()[0]                                 # Add currently selected (highlighted) item
+        # task, timeframe, importance = treeview.item(selected_item)['values']
         if treeview.item(selected_item, "tags") == ("done",):
             treeview.item(selected_item, tags=("undone",))
         else:

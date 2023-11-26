@@ -1,6 +1,5 @@
 from tkinter import ttk
 from ttkthemes import ThemedTk
-from dialogs import TimeframeDialog
 from task_functions import add_task, delete_task, load_tasks, save_tasks, toggle_task_done, switch_table, update_grouped_table, startup_load_tasks
 import tkinter as tk
 
@@ -40,20 +39,24 @@ treeview.bind("<Double-1>", lambda event: toggle_task_done(event, treeview))
 treeview.tag_configure("done", foreground="grey")
 treeview.tag_configure("undone", foreground="black")
 
+# Buttons & position
 add_button = ttk.Button(root, text="Add Task", command=lambda: add_task(task_entry, treeview, root)) 
 add_button.grid(row=3, column=0, sticky='nsew')
 
+complete_button = ttk.Button(root, text="Complete Task (Hotkey=<Double-1>?)", command=lambda event: toggle_task_done(event, treeview))
+complete_button.grid(row=4, column=0, sticky='nsew')
+
 delete_button = ttk.Button(root, text="Delete Task", command=lambda: delete_task(treeview)) 
-delete_button.grid(row=4, column=0, sticky='nsew')
+delete_button.grid(row=5, column=0, sticky='nsew')
 
 load_button = ttk.Button(root, text="Load Tasks", command=lambda: load_tasks(treeview)) 
-load_button.grid(row=5, column=0, sticky='nsew')
+load_button.grid(row=6, column=0, sticky='nsew')
 
 save_button = ttk.Button(root, text="Save Tasks", command=lambda: save_tasks(treeview))
-save_button.grid(row=6, column=0, sticky='nsew')
+save_button.grid(row=7, column=0, sticky='nsew')
 
-switch_button = ttk.Button(root, text="Switch Table", command=lambda: switch_table(treeview, grouped_treeview))
-switch_button.grid(row=7, column=0, sticky='nsew')
+switch_button = ttk.Button(root, text="Switch View", command=lambda: switch_table(treeview, grouped_treeview))
+switch_button.grid(row=8, column=0, sticky='nsew')
 
 startup_load_tasks(treeview)
 
