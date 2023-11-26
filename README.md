@@ -31,7 +31,7 @@ pip install requirements.txt
 
 Or  
 ```python
-pip install ttkthemes pandas
+pip install ttkthemes pandas tkcalendar
 ```
 
 
