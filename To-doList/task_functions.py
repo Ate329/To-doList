@@ -101,21 +101,13 @@ def toggle_task_done(treeview: ttk.Treeview):
     except:
         pass
 
-
-def switch_table(treeview, grouped_treeview: ttk.Treeview):
-    if treeview.winfo_viewable():
-        treeview.grid_remove()
-        update_grouped_table(grouped_treeview)
-        grouped_treeview.grid()
-    else:
-        grouped_treeview.grid_remove()
-        treeview.grid()
-
-
-def update_grouped_table(grouped_treeview):
+def update_grouped_table(grouped_treeview) -> bool:
+    print(f"Set path: {path}")
     for i in grouped_treeview.get_children():
         grouped_treeview.delete(i)
-
+    if not path:
+        messagebox.showerror("ERROR", "Path of CSV file not set!\nRun Load Tasks button first to select a filepath!")
+        return False # Path error -> halt execution
     df = pd.read_csv(path, header=None, names=["Task", "Timeframe", "Importance", "tags"])
     grouped = df.groupby("Importance")["Task"].apply(list)
     tasks_by_importance = {"Extreme": [], "High": [], "Medium": [], "Low": [], "Idle": []}
@@ -133,3 +125,18 @@ def update_grouped_table(grouped_treeview):
             else:
                 row.append("")
         grouped_treeview.insert('', 'end', values=row)
+    return True # Successfully updated grouped_treeview -> switch_table procedure can proceed
+
+def switch_table(treeview, grouped_treeview: ttk.Treeview):
+    if treeview.winfo_viewable():
+        # How did you update grouped_treeview from within the inner function??
+        success = update_grouped_table(grouped_treeview)
+        if not success: 
+            return # Early return if not success aka. Path not set 
+        treeview.grid_remove()
+        grouped_treeview.grid()
+    else:
+        grouped_treeview.grid_remove()
+        treeview.grid()
+
+
