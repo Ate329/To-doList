@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-from tkinter import filedialog, ttk
+from tkinter import filedialog, ttk, messagebox
 import tkinter as tk
 from dialogs import TimeframeDialog
 import os
@@ -69,8 +69,11 @@ def load_tasks(treeview: ttk.Treeview):
                     task, timeframe, importance, *status = row
                     status = tuple(status)
                     treeview.insert('', 'end', values=(task, timeframe, importance), tags=status)
-        except:
-            pass
+        except Exception as exception:
+            messagebox.showerror(f"Exception encountered!", f"Exception encountered in Python program when loading tasks from CSV file.")
+    else:
+        print("Failed to determine loading path!")
+        messagebox.showerror("Error", "Loading failed.")
 
 
 def save_tasks(treeview: ttk.Treeview):
@@ -99,7 +102,7 @@ def toggle_task_done(treeview: ttk.Treeview):
         pass
 
 
-def switch_table(treeview, grouped_treeview):
+def switch_table(treeview, grouped_treeview: ttk.Treeview):
     if treeview.winfo_viewable():
         treeview.grid_remove()
         update_grouped_table(grouped_treeview)
