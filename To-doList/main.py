@@ -42,7 +42,7 @@ treeview.tag_configure("undone", foreground="black")
 add_button = ttk.Button(root, text="Add Task", command=lambda: add_task(task_entry, treeview, root)) 
 add_button.grid(row=3, column=0, sticky='nsew')
 
-complete_button = ttk.Button(root, text="Complete Task (Hotkey=<Double-1>?)", command=lambda: toggle_task_done(treeview))
+complete_button = ttk.Button(root, text="Complete Task (Hotkey=Double-click)", command=lambda: toggle_task_done(None, treeview))
 complete_button.grid(row=4, column=0, sticky='nsew')
 
 delete_button = ttk.Button(root, text="Delete Task", command=lambda: delete_task(treeview)) 
