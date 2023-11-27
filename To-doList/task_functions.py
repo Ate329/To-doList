@@ -90,7 +90,7 @@ def save_tasks(treeview: ttk.Treeview):
                 writer.writerow(task[0] + list(task[1]))
 
 
-def toggle_task_done(treeview: ttk.Treeview):
+def toggle_task_done(event, treeview: ttk.Treeview):
     try:
         selected_item = treeview.selection()[0] # Add currently selected (highlighted) item
         task, timeframe, importance = treeview.item(selected_item)['values']
