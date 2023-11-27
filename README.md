@@ -22,7 +22,7 @@ This module contains various functions related to task management, including add
 
 4. Switch between the detailed and grouped view using the "Switch Table" button.    
 
-**Note: Make sure to have the required libraries (tkinter, ttkthemes, pandas) installed before running the application.**   
+**Note: Make sure to have the required libraries (tkinter, ttkthemes, pandas, tkcalendar) installed before running the application.**   
 
 Or you can install the libraries by (Recommended)     
 ```python
