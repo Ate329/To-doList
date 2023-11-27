@@ -24,9 +24,9 @@ This module contains various functions related to task management, including add
 
 **Note: Make sure to have the required libraries (tkinter, ttkthemes, pandas) installed before running the application.**   
 
-Or you can install the libraries by     
+Or you can install the libraries by (Recommended)     
 ```python
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Or  

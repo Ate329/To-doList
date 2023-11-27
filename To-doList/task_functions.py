@@ -27,6 +27,7 @@ def delete_task(treeview: ttk.Treeview):
 
 
 def startup_load_tasks(event, treeview: ttk.Treeview):
+    global path
     if os.path.exists('path.txt'):
         with open('path.txt', 'r') as file:
             path = file.read()
@@ -48,10 +49,15 @@ def load_tasks(treeview: ttk.Treeview):
     global path
     path = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Load Tasks")
 
+    '''
+    uneccesary weird code
     with open('path.txt', 'w'):
         pass
+    '''
+    
     with open('path.txt', 'w') as file:
         file.write(path)
+        file.close()
 
     # print(path) use for debug
     if path:
@@ -83,8 +89,8 @@ def save_tasks(treeview: ttk.Treeview):
 
 def toggle_task_done(treeview: ttk.Treeview):
     try:
-        selected_item = treeview.selection()[0]                                 # Add currently selected (highlighted) item
-        # task, timeframe, importance = treeview.item(selected_item)['values']
+        selected_item = treeview.selection()[0] # Add currently selected (highlighted) item
+        task, timeframe, importance = treeview.item(selected_item)['values']
         if treeview.item(selected_item, "tags") == ("done",):
             treeview.item(selected_item, tags=("undone",))
         else:
